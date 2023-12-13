@@ -14,16 +14,16 @@ namespace CarWashEF.Data
 
         public AppDbContext() 
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             /*
              * WITH DEFAULT VALUE
-            modelBuilder.Entity<OwnOrderServant>()
-                .Property(b => b.ServantId)
-                .HasDefaultValue(""); //Change method to make another constraint
+            modelBuilder.Entity<Servant>()
+                .Property(b => b.Name)
+                .Has(""); //Change method to make another constraint
             */
             modelBuilder.Entity<OwnOrderServant>()
                 .HasKey(sc => new { sc.OwnOrderId, sc.ServantId });
@@ -36,7 +36,8 @@ namespace CarWashEF.Data
                     new Servant { Id = 2, Name = "Windows polishing", Time = 10, Price = 100, ServantType = ServantType.POLISHING },
                     new Servant { Id = 3, Name = "Full washing", Time = 60, Price = 750, ServantType = ServantType.WASH },
                     new Servant { Id = 4, Name = "Full polishing", Time = 70, Price = 500, ServantType = ServantType.POLISHING },
-                    new Servant { Id = 5, Name = "Dry cleaning", Time = 120, Price = 2000, ServantType = ServantType.DRY_CLEANERS }
+                    new Servant { Id = 5, Name = "Dry cleaning", Time = 120, Price = 2000, ServantType = ServantType.DRY_CLEANERS },
+                    new Servant { Id = 6, Name = "NEW", Time = 0, Price = 0, ServantType = ServantType.DRY_CLEANERS }
                 );
             base.OnModelCreating(modelBuilder);
         }
@@ -45,6 +46,5 @@ namespace CarWashEF.Data
         {
             optionsBuilder.UseSqlServer("Server=TERACT10SLAPTOP;Database=car_wash;Integrated Security=True;");
         }
-
     }
 }

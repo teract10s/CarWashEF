@@ -30,7 +30,7 @@ namespace CarWashEF.Model
         [Column("points")]
         public float Points {  get; set; }
 
-        public List<Order> Orders { get; set; } = new List<Order>();
+        public virtual List<Order> Orders { get; set; } = new List<Order>();
 
         public User() { }
 

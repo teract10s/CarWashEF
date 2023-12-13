@@ -167,9 +167,20 @@
       <DependentUpon>car_washDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Data\AppDbContext.cs" />
+    <Compile Include="dto\GroupedPoints.cs" />
+    <Compile Include="dto\UserWithOrderDetailsDto.cs" />
     <Compile Include="exceptions\EntityNotFoundException.cs" />
     <Compile Include="exceptions\InsertEntityException.cs" />
     <Compile Include="exceptions\WrongEmailException.cs" />
+    <Compile Include="Migrations\20231206113721_CreateDb.cs" />
+    <Compile Include="Migrations\20231206113721_CreateDb.designer.cs">
+      <DependentUpon>20231206113721_CreateDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20231206113814_AddServant6.cs" />
+    <Compile Include="Migrations\20231206113814_AddServant6.designer.cs">
+      <DependentUpon>20231206113814_AddServant6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\OrderServant.cs" />
     <Compile Include="Model\OwnOrderServant.cs" />

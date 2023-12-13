@@ -2,6 +2,7 @@
 using CarWashEF.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace CarWashEF.Repository
 {
@@ -47,6 +48,20 @@ namespace CarWashEF.Repository
             {
                 dbContext.Orders.Remove(orderFromDb);
                 dbContext.SaveChanges();
+            }
+        }
+
+        public static List<Order> GetByUserIdExample(int userId)
+        {
+            using (var dbContext = new AppDbContext())
+            {
+                var user = dbContext.Users.Find(userId);
+
+                dbContext.Entry(user)
+                       .Collection(u => u.Orders)
+                       .Load();
+
+                return user.Orders.ToList();
             }
         }
     }
