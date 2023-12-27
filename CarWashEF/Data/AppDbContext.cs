@@ -19,12 +19,12 @@ namespace CarWashEF.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*
-             * WITH DEFAULT VALUE
+            
+            /* WITH DEFAULT VALUE
             modelBuilder.Entity<Servant>()
                 .Property(b => b.Name)
-                .Has(""); //Change method to make another constraint
-            */
+                .HasColumnType("varchar"); //Change method to make another constraint
+            //*/
             modelBuilder.Entity<OwnOrderServant>()
                 .HasKey(sc => new { sc.OwnOrderId, sc.ServantId });
 

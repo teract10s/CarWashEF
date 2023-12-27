@@ -1,27 +1,31 @@
-﻿using CarWashEF.Data;
-using CarWashEF.Model;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System;
-using System.Linq;
-using CarWashEF.Repository;
-using System.Windows.Forms;
-using CarWashEF.dto;
+﻿using System;
+using System.Diagnostics;
+using CarWashEF.Data;
+using CarWashEF.Multithreading;
 
 namespace CarWashEF
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            try
+            long startTimeStamp = Stopwatch.GetTimestamp();
+            for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(UserRepository.GetUserCount());
-            } catch(Exception e) {
-                Console.WriteLine(e.Message);
+                var user = UserGenerator.GenerateUser("usual");
+                using (var context = new AppDbContext())
+                {
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
             }
+            long endTimeStamp = Stopwatch.GetTimestamp();
+            Console.WriteLine("Time (without threads): " + (endTimeStamp - startTimeStamp));
+            Console.WriteLine("Clasic(without threads) usage task completed successfully...\n");
+
+            TPLUsage.GenerateAndReadUsers();
+            ClassicUsage.GenerateAndReadUsers();
+            Console.WriteLine("Tasks completed successfully.");
         }
     }
 }

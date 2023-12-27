@@ -147,7 +147,7 @@ namespace CarWashEF.Repository
         {
             using (var dbContext = new AppDbContext())
             {
-                IEnumerable<User> users = dbContext.Users.Include(u => u.Orders).ToList();
+                List<User> users = dbContext.Users.Include(u => u.Orders).ToList();
                 return new List<User>(users);
             }
         }
@@ -185,7 +185,7 @@ namespace CarWashEF.Repository
         {
             using (var context = new AppDbContext())
             {
-                //var result = context.Database.SqlQuery<int>($"SELECT dbo.GetUserCount()").FirstOrDefault();
+                var result = context.Users.FromSql($"SELECT dbo.GetUserCount()").FirstOrDefault();
                 //return result;
 
                 return context.Users.Count();
